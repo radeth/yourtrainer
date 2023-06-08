@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yourtrainer-dev-191021-authRole",
+      "UnauthRoleArn": "arn:aws:iam::859419417247:role/amplify-yourtrainer-dev-191021-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::859419417247:role/amplify-yourtrainer-dev-191021-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-yourtrainer-dev-191021-deployment",
+      "UnauthRoleName": "amplify-yourtrainer-dev-191021-unauthRole",
+      "StackName": "amplify-yourtrainer-dev-191021",
+      "StackId": "arn:aws:cloudformation:eu-north-1:859419417247:stack/amplify-yourtrainer-dev-191021/5b366b70-061f-11ee-b50b-0e5aff402592",
+      "AmplifyAppId": "dyd7sihvn0jbo"
+    }
+  }
+}

@@ -2,7 +2,7 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   amplify_analytics_pinpoint:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: amplify_analytics_pinpoint
       sha256: "5905541e596ea0d7c9a0560508d1b19c66d30e2b13547f0bd29a6ca50b8d9c0d"
@@ -105,22 +105,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.0+1"
-  amplify_storage_s3:
-    dependency: "direct main"
-    description:
-      name: amplify_storage_s3
-      sha256: e08aead5023ce1d15f2cb6cbfdd4e2a5eb3dd95c3df1d5f34f53de7c64d07b7a
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.1"
-  amplify_storage_s3_dart:
-    dependency: transitive
-    description:
-      name: amplify_storage_s3_dart
-      sha256: b2f5d08dc50432e381380d4ed520739835f2d1b69eb4de96f42d8a5aa478c943
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.0+1"
   args:
     dependency: transitive
     description:
@@ -341,6 +325,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  go_router:
+    dependency: "direct main"
+    description:
+      name: go_router
+      sha256: bd7e671d26fd39c78cba82070fa34ef1f830b0e7ed1aeebccabc6561302a7ee5
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.5.9"
   http:
     dependency: transitive
     description:
@@ -747,5 +739,5 @@ packages:
     source: hosted
     version: "6.3.0"
 sdks:
-  dart: ">=3.0.2 <4.0.0"
+  dart: ">=3.0.0 <4.0.0"
   flutter: ">=3.10.0"

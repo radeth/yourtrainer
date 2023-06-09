@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'exercise_list.dart';
+import 'add_excersise.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    ExerciseList(),
+    ProfileNavView(),
     Text(
       'Index 2: School',
       style: optionStyle,
@@ -35,16 +36,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+        title: Text(AppLocalizations.of(context)!.appTitle),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: const Icon(Icons.person_off_rounded),
+            label: AppLocalizations.of(context)!.profile,
             backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(
@@ -57,16 +58,38 @@ class _HomePageState extends State<HomePage> {
             label: 'School',
             backgroundColor: Colors.purple,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-            backgroundColor: Colors.pink,
-          ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
     );
+  }
+}
+
+class ProfileNavView extends StatefulWidget {
+  const ProfileNavView({super.key});
+
+  @override
+  State<ProfileNavView> createState() => _ProfileNavViewState();
+}
+
+class _ProfileNavViewState extends State<ProfileNavView> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Column(
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (BuildContext context) {
+              return const AddExcersicePage();
+            }));
+          },
+          child: const Text('Exercise List'),
+        )
+      ],
+    ));
   }
 }

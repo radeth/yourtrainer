@@ -1,4 +1,7 @@
 {
   "appTitle": "Twój trener",
-  "profile": "Profil"
+  "profile": "Profil",
+  "yourExercises": "Dodaj Ćwiczenie",
+  "addExercise": "Twoje Ćwiczenia"
+
 }

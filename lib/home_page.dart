@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yourtrainer/excersie/ui/_list_page.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:yourtrainer/excersie/ui/exercises_list_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -77,19 +77,18 @@ class ProfileNavView extends StatefulWidget {
 class _ProfileNavViewState extends State<ProfileNavView> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Column(
+    return Column(
       children: [
         ElevatedButton(
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (BuildContext context) {
-              return const ExcersiceListPage();
+              return const ExercisesListPage();
             }));
           },
           child: const Text('Exercise List'),
         )
       ],
-    ));
+    );
   }
 }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:yourtrainer/excersie/ui/add_exercise_page.dart';
 
-class AddExcersicePage extends StatefulWidget {
-  const AddExcersicePage({super.key});
+class ExerciseListPage extends StatefulWidget {
+  const ExerciseListPage({super.key});
 
   @override
-  State<AddExcersicePage> createState() => _AddExcersicePageState();
+  State<ExerciseListPage> createState() => _ExerciseListPageState();
 }
 
-class _AddExcersicePageState extends State<AddExcersicePage> {
+class _ExerciseListPageState extends State<ExerciseListPage> {
   int _count = 0;
 
   @override
@@ -19,7 +20,12 @@ class _AddExcersicePageState extends State<AddExcersicePage> {
       body: Center(child: Text('You have pressed the button $_count times.')),
       backgroundColor: Colors.blueGrey.shade200,
       floatingActionButton: FloatingActionButton(
-        onPressed: () => setState(() => _count++),
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
+            return const AddExercisePage();
+          }));
+        },
         tooltip: 'Increment Counter',
         child: const Icon(Icons.add),
       ),

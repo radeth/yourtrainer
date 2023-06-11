@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yourtrainer/excersie/ui/_list_page.dart';
 
-import 'add_excersise.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
@@ -84,7 +84,7 @@ class _ProfileNavViewState extends State<ProfileNavView> {
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (BuildContext context) {
-              return const AddExcersicePage();
+              return const ExcersiceListPage();
             }));
           },
           child: const Text('Exercise List'),

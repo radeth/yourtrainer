@@ -6,6 +6,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'amplifyconfiguration.dart';
 import 'home_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:amplify_datastore/amplify_datastore.dart';
+
+import 'models/ModelProvider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,6 +31,8 @@ class _MyAppState extends State<MyApp> {
   void _configureAmplify() async {
     try {
       await Amplify.addPlugin(AmplifyAuthCognito());
+      await Amplify.addPlugin(
+          AmplifyDataStore(modelProvider: ModelProvider.instance));
       await Amplify.configure(amplifyconfig);
       safePrint('Successfully configured');
     } on Exception catch (e) {
@@ -48,8 +53,8 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [
-            Locale('en'), 
-            Locale('pl'), 
+            Locale('en'),
+            Locale('pl'),
           ],
           home: const HomePage()),
     );

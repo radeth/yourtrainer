@@ -1,6 +1,16 @@
 {
   "appTitle": "Your Trainer",
   "profile": "Profile",
-  "yourExercises": "Your Exercises",
-  "addExercise": "Add Exercise"
+  "yourExercises": "Your exercises",
+  "addExercise": "Add exercise",
+  "yourTrainingUnits": "Your training units",
+  "exerciseNameValidationErrorMessage":"Enter valid exercise name",
+  "exerciseNameHint": "Exercise name",
+  "exerciseDescriptionValidationErrorMessage":"Enter valid exercise description",
+  "exerciseDescriptionHint": "Exercise description",
+  "saveExercise": "Save exercise",  
+  "yes": "Yes",
+  "no": "No",
+  "exerciseDeleteConfirmation": "Delete this exercise?",
+  "pleseConfirm": "Please confirm"
 }

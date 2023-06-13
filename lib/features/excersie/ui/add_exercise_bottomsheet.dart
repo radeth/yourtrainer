@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yourtrainer/excersie/controller/exercise_list_controller.dart';
+import 'package:yourtrainer/features/excersie/controller/exercise_list_controller.dart';
+import 'package:yourtrainer/localization_ext.dart';
 
 class AddExerciseBottomSheet extends HookConsumerWidget {
   AddExerciseBottomSheet({
@@ -12,7 +13,7 @@ class AddExerciseBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tripNameController = useTextEditingController();
+    final exerciseNameController = useTextEditingController();
     final descriptionController = useTextEditingController();
 
     return Form(
@@ -29,10 +30,11 @@ class AddExerciseBottomSheet extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
-              controller: tripNameController,
+              controller: exerciseNameController,
               keyboardType: TextInputType.name,
               validator: (value) {
-                const validationError = 'Enter a valid exercise name';
+                var validationError = AppLocalizations.of(context)!
+                    .exerciseNameValidationErrorMessage;
                 if (value == null || value.isEmpty) {
                   return validationError;
                 }
@@ -41,7 +43,8 @@ class AddExerciseBottomSheet extends HookConsumerWidget {
               },
               autofocus: true,
               autocorrect: false,
-              decoration: const InputDecoration(hintText: "Exercise Name"),
+              decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context)!.exerciseNameHint),
               textInputAction: TextInputAction.next,
             ),
             const SizedBox(
@@ -52,19 +55,10 @@ class AddExerciseBottomSheet extends HookConsumerWidget {
               controller: descriptionController,
               autofocus: true,
               autocorrect: false,
-              decoration:
-                  const InputDecoration(hintText: "Exercise Description"),
               textInputAction: TextInputAction.next,
-              validator: (value) {
-                if (value != null && value.isNotEmpty) {
-                  return null;
-                } else {
-                  return 'Enter a valid description';
-                }
-              },
             ),
             TextButton(
-                child: const Text('OK'),
+                child: Text(AppLocalizations.of(context)!.saveExercise),
                 onPressed: () async {
                   final currentState = formGlobalKey.currentState;
                   if (currentState == null) {
@@ -72,7 +66,7 @@ class AddExerciseBottomSheet extends HookConsumerWidget {
                   }
                   if (currentState.validate()) {
                     ref.read(exercisesListControllerProvider).add(
-                          name: tripNameController.text,
+                          name: exerciseNameController.text,
                           description: descriptionController.text,
                         );
                     Navigator.of(context).pop();

@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yourtrainer/excersie/data/exercises_repository.dart';
+import 'package:yourtrainer/features/excersie/data/exercises_repository.dart';
 import 'package:yourtrainer/models/ModelProvider.dart';
 
 final exercisesListControllerProvider =

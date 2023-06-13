@@ -2,7 +2,7 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:yourtrainer/models/ModelProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../models/Exercise.dart';
+import '../../../models/Exercise.dart';
 
 final exercisesDataStoreServiceProvider =
     Provider<ExercisesDataStoreService>((ref) {

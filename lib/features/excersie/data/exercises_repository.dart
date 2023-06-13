@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/Exercise.dart';
+import '../../../models/Exercise.dart';
 import '../services/exercises_datastore_service.dart';
 
 final exercisesRepositoryProvider = Provider<ExercisesRepository>((ref) {

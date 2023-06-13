@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yourtrainer/excersie/data/exercises_repository.dart';
-import 'package:yourtrainer/excersie/ui/add_exercise_bottomsheet.dart';
+import 'package:yourtrainer/common/routes.dart';
+import 'package:yourtrainer/features/excersie/data/exercises_repository.dart';
+import 'package:yourtrainer/features/excersie/ui/add_exercise_bottomsheet.dart';
+import 'package:yourtrainer/features/excersie/ui/excercise_card.dart';
+import 'package:yourtrainer/localization_ext.dart';
 
 class ExercisesListPage extends HookConsumerWidget {
   const ExercisesListPage({
     super.key,
   });
 
-  void showAddTripDialog(BuildContext context) async {
+  void showAddExerciseDialog(BuildContext context) async {
     await showModalBottomSheet<void>(
       isScrollControlled: true,
       elevation: 5,
@@ -26,13 +30,19 @@ class ExercisesListPage extends HookConsumerWidget {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text(
-            'Workout planner Planner',
+          title: Text(
+            AppLocalizations.of(context)!.yourExercises,
           ),
+          // leading: IconButton(
+          //   onPressed: () {
+          //     context.goNamed(AppRoute.home.name);
+          //   },
+          //   icon: const Icon(Icons.arrow_back),
+          // ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            showAddTripDialog(context);
+            showAddExerciseDialog(context);
           },
           child: const Icon(Icons.add),
         ),
@@ -53,8 +63,7 @@ class ExercisesListPage extends HookConsumerWidget {
                           childAspectRatio:
                               (orientation == Orientation.portrait) ? 0.9 : 1.4,
                           children: exercises.map((exerciseData) {
-                            // return TripCard(exercise: exerciseData!);
-                            return Text(exerciseData!.name);
+                            return ExerciseCard(exercise: exerciseData!);
                           }).toList(),
                         ),
                       ),

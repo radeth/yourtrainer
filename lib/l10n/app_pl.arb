@@ -1,7 +1,17 @@
 {
   "appTitle": "Twój trener",
   "profile": "Profil",
-  "yourExercises": "Dodaj Ćwiczenie",
-  "addExercise": "Twoje Ćwiczenia"
+  "yourExercises": "Twoje ćwiczenia",
+  "addExercise": "Dodaj ćwiczenie",
+  "yourTrainingUnits": "Twoje jednoski treningowe",
+  "exerciseNameValidationErrorMessage":"Wprowadź prawidłową nazwe ćwiczenia",
+  "exerciseNameHint": "Nazwa ćwiczenia",
+  "exerciseDescriptionValidationErrorMessage":"Wprowadź prawidłowy opis ćwiczenia",
+  "exerciseDescriptionHint": "Opis ćwiczenia",
+  "saveExercise": "Zapisz ćwiczenie",
+  "yes": "Tak",
+  "no": "Nie",
+  "exerciseDeleteConfirmation": "Usunąć to ćwiczenie?",
+  "pleseConfirm": "Potwierdź"
 
 }

@@ -14,11 +14,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     ProfileNavView(),
-    ExercisesListPage(),
+    Text(
+      'Index 2: Settings',
+      style: optionStyle,
+    ),
     Text(
       'Index 3: Settings',
       style: optionStyle,
@@ -48,8 +50,8 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.sports_martial_arts),
-            label: AppLocalizations.of(context)!.yourExercises,
+            icon: const Icon(Icons.fitness_center),
+            label: AppLocalizations.of(context)!.yourTrainingUnits,
             backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
@@ -90,6 +92,19 @@ class ProfileNavView extends StatefulWidget {
 class _ProfileNavViewState extends State<ProfileNavView> {
   @override
   Widget build(BuildContext context) {
-    return Column();
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Card(
+            child: ListTile(
+                title: Text(AppLocalizations.of(context)!.yourExercises),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+                onTap: () => context.goNamed(AppRoute.exerciseList.name),
+                leading: const Icon(Icons.sports_martial_arts)),
+          )
+        ],
+      ),
+    );
   }
 }

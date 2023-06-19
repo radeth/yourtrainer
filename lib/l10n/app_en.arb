@@ -12,5 +12,10 @@
   "yes": "Yes",
   "no": "No",
   "exerciseDeleteConfirmation": "Delete this exercise?",
-  "pleseConfirm": "Please confirm"
+  "pleseConfirm": "Please confirm",
+  "trainer": "Trainer",
+  "activity": "Activity"
+
+
+
 }

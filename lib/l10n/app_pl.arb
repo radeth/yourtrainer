@@ -12,6 +12,7 @@
   "yes": "Tak",
   "no": "Nie",
   "exerciseDeleteConfirmation": "Usunąć to ćwiczenie?",
-  "pleseConfirm": "Potwierdź"
-
+  "pleseConfirm": "Potwierdź",
+  "trainer": "Trener",
+  "activity": "Aktywność"
 }

@@ -7,7 +7,7 @@ import 'package:yourtrainer/common/routes.dart';
 import 'package:yourtrainer/features/excersie/ui/exercise_details_page.dart';
 import 'package:yourtrainer/features/excersie/ui/exercises_list_page.dart';
 import 'package:yourtrainer/models/Exercise.dart';
-import 'home_page.dart';
+import 'features/homePage/home_page.dart';
 import 'package:yourtrainer/common/colors.dart' as constants;
 
 class YourTrainerApp extends StatelessWidget {
@@ -67,9 +67,8 @@ class YourTrainerApp extends StatelessWidget {
         routerDelegate: router.routerDelegate,
         builder: Authenticator.builder(),
         theme: ThemeData(
-          colorScheme:
-              ColorScheme.fromSwatch(primarySwatch: constants.primaryColor)
-                  .copyWith(background: const Color(0xff82CFEA)),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: constants.primaryColor)
+              .copyWith(background: const Color(0xff82CFEA)),
         ),
         localizationsDelegates: const [
           AppLocalizations.delegate,

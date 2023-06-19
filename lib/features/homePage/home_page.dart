@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
-import 'package:yourtrainer/common/routes.dart';
-import 'package:yourtrainer/features/excersie/ui/exercises_list_page.dart';
+import 'package:yourtrainer/features/homePage/profile_nav_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,11 +16,15 @@ class _HomePageState extends State<HomePage> {
   static const List<Widget> _widgetOptions = <Widget>[
     ProfileNavView(),
     Text(
-      'Index 2: Settings',
+      'Index 2: jednostki teningowe',
       style: optionStyle,
     ),
     Text(
-      'Index 3: Settings',
+      'Index 3: aktywnosc',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 3: trener',
       style: optionStyle,
     ),
   ];
@@ -38,6 +40,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.appTitle),
+        // actions: [IconButton(onPressed: onPressed, icon: Ic)],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -55,55 +58,19 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-            backgroundColor: Colors.purple,
+            icon: const Icon(Icons.stadium),
+            label: AppLocalizations.of(context)!.activity,
+            backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.sports),
+            label: AppLocalizations.of(context)!.trainer,
+            backgroundColor: Colors.blue,
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
-      ),
-    );
-  }
-}
-
-class ExerciesNavView extends StatefulWidget {
-  const ExerciesNavView({super.key});
-
-  @override
-  State<ExerciesNavView> createState() => _ExerciesNavViewState();
-}
-
-class _ExerciesNavViewState extends State<ExerciesNavView> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-class ProfileNavView extends StatefulWidget {
-  const ProfileNavView({super.key});
-
-  @override
-  State<ProfileNavView> createState() => _ProfileNavViewState();
-}
-
-class _ProfileNavViewState extends State<ProfileNavView> {
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Card(
-            child: ListTile(
-                title: Text(AppLocalizations.of(context)!.yourExercises),
-                trailing: const Icon(Icons.keyboard_arrow_right),
-                onTap: () => context.goNamed(AppRoute.exerciseList.name),
-                leading: const Icon(Icons.sports_martial_arts)),
-          )
-        ],
       ),
     );
   }

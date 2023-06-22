@@ -28,10 +28,17 @@ Future<void> main() async {
 }
 
 Future<void> _configureAmplify() async {
+  final datastore = AmplifyDataStore(modelProvider: ModelProvider.instance);
+  final api = AmplifyAPI(modelProvider: ModelProvider.instance);
   await Amplify.addPlugins([
     AmplifyAuthCognito(),
-    AmplifyDataStore(modelProvider: ModelProvider.instance),
-    AmplifyAPI(),
+    datastore,
+    api,
   ]);
-  await Amplify.configure(amplifyconfig);
+  try {
+    await Amplify.configure(amplifyconfig);
+  } on AmplifyAlreadyConfiguredException {
+    safePrint(
+        'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
+  }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:yourtrainer/features/homePage/profile_nav_view.dart';
+import 'package:yourtrainer/features/homePage/chat_nav_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,7 +12,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     ProfileNavView(),
     Text(
@@ -24,9 +25,10 @@ class _HomePageState extends State<HomePage> {
       style: optionStyle,
     ),
     Text(
-      'Index 3: trener',
+      'Index 4: trener',
       style: optionStyle,
     ),
+    ChatNavView(),
   ];
 
   void _onItemTapped(int index) {
@@ -67,6 +69,11 @@ class _HomePageState extends State<HomePage> {
             label: AppLocalizations.of(context)!.trainer,
             backgroundColor: Colors.blue,
           ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.chat_bubble),
+            label: AppLocalizations.of(context)!.chat,
+            backgroundColor: Colors.black,
+          )
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],

@@ -3,4 +3,26 @@ type Exercise @model @auth(rules: [{allow: public}]) {
   name: String!
   description: String
 }
- 
+
+type Friend @model @auth(rules: [{allow: owner, operations: [create, delete, read]}]) {
+  id: ID! @primaryKey
+  name: String!
+  messageText: String!
+  imageUrl: String
+  time: String!
+  isMessageRead: Boolean!
+}
+
+enum MessageDirection {
+  INCOMING
+  OUTGOING
+}
+
+type Message @model 
+  @auth(rules: [{allow: owner, operations: [create, read]}]) 
+{
+  id: ID!
+  friend: ID! @index(name: "messageByFriend") #Friend! @index(name: "messageByFriend")
+  content: String!
+  direction: MessageDirection!
+}

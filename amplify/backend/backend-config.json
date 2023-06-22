@@ -1,20 +1,35 @@
 {
   "api": {
     "yourtrainer": {
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "yourtrainer1551ff5c"
+        }
+      ],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [
+            {
+              "apiKeyConfig": {
+                "apiKeyExpirationDate": "2024-06-20T16:07:57.392Z",
+                "apiKeyExpirationDays": 365,
+                "description": "amplify-cli"
+              },
+              "authenticationType": "API_KEY"
+            },
             {
               "authenticationType": "AWS_IAM"
             }
           ],
           "defaultAuthentication": {
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
-            },
-            "authenticationType": "API_KEY"
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authyourtrainer1551ff5c"
+            }
           }
         }
       },

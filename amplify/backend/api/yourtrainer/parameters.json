@@ -2,11 +2,5 @@
   "AppSyncApiName": "yourtrainer",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2023-06-21T14:21:14.758Z",
-  "AuthCognitoUserPoolId": {
-    "Fn::GetAtt": [
-      "authyourtrainer1551ff5c",
-      "Outputs.UserPoolId"
-    ]
-  }
+  "AuthModeLastUpdated": "2023-06-24T10:18:41.822Z"
 }

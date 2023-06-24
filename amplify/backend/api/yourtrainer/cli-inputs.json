@@ -4,8 +4,9 @@
     "apiName": "yourtrainer",
     "serviceName": "AppSync",
     "defaultAuthType": {
-      "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authyourtrainer1551ff5c"
+      "mode": "API_KEY",
+      "keyDescription": "api key description",
+      "expirationTime": 30
     },
     "conflictResolution": {
       "defaultResolutionStrategy": {
@@ -13,12 +14,6 @@
       }
     },
     "additionalAuthTypes": [
-      {
-        "mode": "API_KEY",
-        "expirationTime": 365,
-        "apiKeyExpirationDate": "2024-06-20T16:07:57.392Z",
-        "keyDescription": "amplify-cli"
-      },
       {
         "mode": "AWS_IAM"
       }

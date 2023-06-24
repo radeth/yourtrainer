@@ -38,7 +38,6 @@ Future<void> _configureAmplify() async {
   try {
     await Amplify.configure(amplifyconfig);
   } on AmplifyAlreadyConfiguredException {
-    safePrint(
-        'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
+    safePrint('Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
   }
 }

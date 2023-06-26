@@ -1,4 +1,6 @@
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_authenticator/amplify_authenticator.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,20 +8,31 @@ import 'package:go_router/go_router.dart';
 import 'package:yourtrainer/common/routes.dart';
 import 'package:yourtrainer/features/excersie/ui/exercise_details_page.dart';
 import 'package:yourtrainer/features/excersie/ui/exercises_list_page.dart';
+import 'package:yourtrainer/features/homePage/ui/home_page.dart';
+import 'package:yourtrainer/main.dart';
 import 'package:yourtrainer/models/Exercise.dart';
-import 'features/homePage/home_page.dart';
 import 'package:yourtrainer/common/colors.dart' as constants;
+import 'package:yourtrainer/models/ModelProvider.dart';
 
 class YourTrainerApp extends StatelessWidget {
   const YourTrainerApp({
     required this.isAmplifySuccessfullyConfigured,
     Key? key,
   }) : super(key: key);
-
   final bool isAmplifySuccessfullyConfigured;
-
   @override
   Widget build(BuildContext context) {
+    Amplify.Hub.listen(HubChannel.Auth, (event) async {
+      if (event.eventName == "SIGNED_IN") {
+        final newUser = User(
+            accountType: AccountType.client.name, email: event.payload!.signInDetails.toJson()['username'] as String);
+        try {
+          await Amplify.DataStore.save(newUser);
+        } on DataStoreException catch (e) {
+          safePrint('Something went wrong saving model: ${e.message}');
+        }
+      }
+    });
     final router = GoRouter(
       routes: [
         GoRoute(

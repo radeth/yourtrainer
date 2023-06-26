@@ -12,11 +12,11 @@
       "AmplifyAppId": "dyd7sihvn0jbo"
     },
     "categories": {
-      "auth": {
-        "yourtrainer1551ff5c": {}
-      },
       "api": {
         "yourtrainer": {}
+      },
+      "auth": {
+        "yourtrainer1551ff5c": {}
       }
     }
   }

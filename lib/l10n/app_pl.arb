@@ -14,5 +14,6 @@
   "exerciseDeleteConfirmation": "Usunąć to ćwiczenie?",
   "pleseConfirm": "Potwierdź",
   "trainer": "Trener",
-  "activity": "Aktywność"
+  "activity": "Aktywność",
+  "logout":"Wyloguj"
 }

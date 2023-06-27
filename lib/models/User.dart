@@ -23,12 +23,12 @@ import 'ModelProvider.dart';
 import 'package:amplify_core/amplify_core.dart' as amplify_core;
 
 
-/** This is an auto generated class representing the Exercise type in your schema. */
-class Exercise extends amplify_core.Model {
-  static const classType = const _ExerciseModelType();
+/** This is an auto generated class representing the User type in your schema. */
+class User extends amplify_core.Model {
+  static const classType = const _UserModelType();
   final String id;
-  final String? _name;
-  final String? _description;
+  final String? _email;
+  final String? _accountType;
   final amplify_core.TemporalDateTime? _createdAt;
   final amplify_core.TemporalDateTime? _updatedAt;
 
@@ -39,15 +39,15 @@ class Exercise extends amplify_core.Model {
   @override
   String getId() => id;
   
-  ExerciseModelIdentifier get modelIdentifier {
-      return ExerciseModelIdentifier(
+  UserModelIdentifier get modelIdentifier {
+      return UserModelIdentifier(
         id: id
       );
   }
   
-  String get name {
+  String get email {
     try {
-      return _name!;
+      return _email!;
     } catch(e) {
       throw amplify_core.AmplifyCodeGenModelException(
           amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
@@ -58,8 +58,17 @@ class Exercise extends amplify_core.Model {
     }
   }
   
-  String? get description {
-    return _description;
+  String get accountType {
+    try {
+      return _accountType!;
+    } catch(e) {
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
   }
   
   amplify_core.TemporalDateTime? get createdAt {
@@ -70,13 +79,13 @@ class Exercise extends amplify_core.Model {
     return _updatedAt;
   }
   
-  const Exercise._internal({required this.id, required name, description, createdAt, updatedAt}): _name = name, _description = description, _createdAt = createdAt, _updatedAt = updatedAt;
+  const User._internal({required this.id, required email, required accountType, createdAt, updatedAt}): _email = email, _accountType = accountType, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Exercise({String? id, required String name, String? description}) {
-    return Exercise._internal(
+  factory User({String? id, required String email, required String accountType}) {
+    return User._internal(
       id: id == null ? amplify_core.UUID.getUUID() : id,
-      name: name,
-      description: description);
+      email: email,
+      accountType: accountType);
   }
   
   bool equals(Object other) {
@@ -86,10 +95,10 @@ class Exercise extends amplify_core.Model {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Exercise &&
+    return other is User &&
       id == other.id &&
-      _name == other._name &&
-      _description == other._description;
+      _email == other._email &&
+      _accountType == other._accountType;
   }
   
   @override
@@ -99,10 +108,10 @@ class Exercise extends amplify_core.Model {
   String toString() {
     var buffer = new StringBuffer();
     
-    buffer.write("Exercise {");
+    buffer.write("User {");
     buffer.write("id=" + "$id" + ", ");
-    buffer.write("name=" + "$_name" + ", ");
-    buffer.write("description=" + "$_description" + ", ");
+    buffer.write("email=" + "$_email" + ", ");
+    buffer.write("accountType=" + "$_accountType" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -110,50 +119,50 @@ class Exercise extends amplify_core.Model {
     return buffer.toString();
   }
   
-  Exercise copyWith({String? name, String? description}) {
-    return Exercise._internal(
+  User copyWith({String? email, String? accountType}) {
+    return User._internal(
       id: id,
-      name: name ?? this.name,
-      description: description ?? this.description);
+      email: email ?? this.email,
+      accountType: accountType ?? this.accountType);
   }
   
-  Exercise copyWithModelFieldValues({
-    ModelFieldValue<String>? name,
-    ModelFieldValue<String?>? description
+  User copyWithModelFieldValues({
+    ModelFieldValue<String>? email,
+    ModelFieldValue<String>? accountType
   }) {
-    return Exercise._internal(
+    return User._internal(
       id: id,
-      name: name == null ? this.name : name.value,
-      description: description == null ? this.description : description.value
+      email: email == null ? this.email : email.value,
+      accountType: accountType == null ? this.accountType : accountType.value
     );
   }
   
-  Exercise.fromJson(Map<String, dynamic> json)  
+  User.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
-      _name = json['name'],
-      _description = json['description'],
+      _email = json['email'],
+      _accountType = json['accountType'],
       _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'name': _name, 'description': _description, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'email': _email, 'accountType': _accountType, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
     'id': id,
-    'name': _name,
-    'description': _description,
+    'email': _email,
+    'accountType': _accountType,
     'createdAt': _createdAt,
     'updatedAt': _updatedAt
   };
 
-  static final amplify_core.QueryModelIdentifier<ExerciseModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<ExerciseModelIdentifier>();
+  static final amplify_core.QueryModelIdentifier<UserModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<UserModelIdentifier>();
   static final ID = amplify_core.QueryField(fieldName: "id");
-  static final NAME = amplify_core.QueryField(fieldName: "name");
-  static final DESCRIPTION = amplify_core.QueryField(fieldName: "description");
+  static final EMAIL = amplify_core.QueryField(fieldName: "email");
+  static final ACCOUNTTYPE = amplify_core.QueryField(fieldName: "accountType");
   static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
-    modelSchemaDefinition.name = "Exercise";
-    modelSchemaDefinition.pluralName = "Exercises";
+    modelSchemaDefinition.name = "User";
+    modelSchemaDefinition.pluralName = "Users";
     
     modelSchemaDefinition.authRules = [
       amplify_core.AuthRule(
@@ -169,14 +178,14 @@ class Exercise extends amplify_core.Model {
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: Exercise.NAME,
+      key: User.EMAIL,
       isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: Exercise.DESCRIPTION,
-      isRequired: false,
+      key: User.ACCOUNTTYPE,
+      isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
@@ -196,29 +205,29 @@ class Exercise extends amplify_core.Model {
   });
 }
 
-class _ExerciseModelType extends amplify_core.ModelType<Exercise> {
-  const _ExerciseModelType();
+class _UserModelType extends amplify_core.ModelType<User> {
+  const _UserModelType();
   
   @override
-  Exercise fromJson(Map<String, dynamic> jsonData) {
-    return Exercise.fromJson(jsonData);
+  User fromJson(Map<String, dynamic> jsonData) {
+    return User.fromJson(jsonData);
   }
   
   @override
   String modelName() {
-    return 'Exercise';
+    return 'User';
   }
 }
 
 /**
  * This is an auto generated class representing the model identifier
- * of [Exercise] in your schema.
+ * of [User] in your schema.
  */
-class ExerciseModelIdentifier implements amplify_core.ModelIdentifier<Exercise> {
+class UserModelIdentifier implements amplify_core.ModelIdentifier<User> {
   final String id;
 
-  /** Create an instance of ExerciseModelIdentifier using [id] the primary key. */
-  const ExerciseModelIdentifier({
+  /** Create an instance of UserModelIdentifier using [id] the primary key. */
+  const UserModelIdentifier({
     required this.id});
   
   @override
@@ -236,7 +245,7 @@ class ExerciseModelIdentifier implements amplify_core.ModelIdentifier<Exercise> 
   String serializeAsString() => serializeAsMap().values.join('#');
   
   @override
-  String toString() => 'ExerciseModelIdentifier(id: $id)';
+  String toString() => 'UserModelIdentifier(id: $id)';
   
   @override
   bool operator ==(Object other) {
@@ -244,7 +253,7 @@ class ExerciseModelIdentifier implements amplify_core.ModelIdentifier<Exercise> 
       return true;
     }
     
-    return other is ExerciseModelIdentifier &&
+    return other is UserModelIdentifier &&
       id == other.id;
   }
   

@@ -7,8 +7,11 @@ import 'package:yourtrainer/common/routes.dart';
 import 'package:yourtrainer/features/excersie/ui/exercise_details_page.dart';
 import 'package:yourtrainer/features/excersie/ui/exercises_list_page.dart';
 import 'package:yourtrainer/models/Exercise.dart';
+import 'package:yourtrainer/models/Profile.dart';
 import 'features/homePage/home_page.dart';
 import 'package:yourtrainer/common/colors.dart' as constants;
+import 'package:yourtrainer/models/api/profile.dart';
+import 'dart:ui';
 
 class YourTrainerApp extends StatelessWidget {
   const YourTrainerApp({
@@ -52,6 +55,52 @@ class YourTrainerApp extends StatelessWidget {
             );
           },
         ),
+        GoRoute(
+          path: '/debug',
+          name: AppRoute.debugMenu.name,
+          builder: (context, state) {
+            return ListView(
+              children: [
+                GestureDetector(
+                  onTap: () {}, // TODO: add debug functionality
+                  child: const Text("Become trainer")
+                )
+              ],
+            );
+          }
+        ),
+        GoRoute(
+          path: '/profile',
+          name: AppRoute.profile.name,
+          builder: (context, state) {
+            return FutureBuilder(
+              future: fetchProfile(),
+              builder: (BuildContext context, AsyncSnapshot<Profile?> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: Text("Loading"));
+                } else {
+                  if (snapshot.hasError || !snapshot.hasData) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    final name = snapshot.data?.name;
+                    return ListView(
+                      children: <Widget>[
+                        Text('name: $name'),
+                      ]
+                    );
+                  }
+                }
+              }
+            );
+          }
+        ),
+        GoRoute(
+          path: '/trainer/:id',
+          name: AppRoute.trainerProfile.name,
+          builder: (context, state) {
+            return const Text("unimplemented");
+          }
+        )
       ],
       errorBuilder: (context, state) => Scaffold(
         body: Center(

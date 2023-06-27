@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yourtrainer/common/routes.dart';
@@ -19,10 +21,25 @@ class _ProfileNavViewState extends State<ProfileNavView> {
         children: [
           Card(
             child: ListTile(
+              title: Text(AppLocalizations.of(context)!.profile),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () => context.pushNamed(AppRoute.profile.name),
+              leading: const Icon(Icons.account_circle)
+            )
+          ),
+          Card(
+            child: ListTile(
                 title: Text(AppLocalizations.of(context)!.yourExercises),
                 trailing: const Icon(Icons.keyboard_arrow_right),
-                onTap: () => context.goNamed(AppRoute.exerciseList.name),
+                onTap: () => context.pushNamed(AppRoute.exerciseList.name),
                 leading: const Icon(Icons.sports_martial_arts)),
+          ),
+          Card(
+            child: ListTile(
+                title: Text(AppLocalizations.of(context)!.debugMenu),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+                onTap: () => context.pushNamed(AppRoute.debugMenu.name),
+                leading: const Icon(Icons.computer_sharp)),
           )
         ],
       ),

@@ -15,8 +15,7 @@
   "pleseConfirm": "Please confirm",
   "trainer": "Trainer",
   "activity": "Activity",
-  "logout":"Logout"
-
-
-
+  "logout":"Logout",
+  "chat": "Chat",
+  "debugMenu": "Debug Menu"
 }

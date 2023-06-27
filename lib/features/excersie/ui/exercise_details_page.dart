@@ -7,7 +7,6 @@ import 'package:yourtrainer/features/excersie/controller/exercise_controller.dar
 import 'package:yourtrainer/features/excersie/ui/delete_exercise_dialog.dart';
 import 'package:yourtrainer/localization_ext.dart';
 import 'package:yourtrainer/models/Exercise.dart';
-import 'package:yourtrainer/common/colors.dart' as constants;
 
 class ExerciseDetailsPage extends HookConsumerWidget {
   ExerciseDetailsPage({

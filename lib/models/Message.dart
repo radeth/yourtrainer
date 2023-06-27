@@ -199,7 +199,7 @@ class Message extends amplify_core.Model {
     ];
     
     modelSchemaDefinition.indexes = [
-      amplify_core.ModelIndex(fields: const ["friend"], name: "byFriend")
+      amplify_core.ModelIndex(fields: const ["friend"], name: "byFriendship")
     ];
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());

@@ -39,10 +39,18 @@ Future<void> main() async {
 enum AccountType { client }
 
 Future<void> _configureAmplify() async {
+  final datastore = AmplifyDataStore(modelProvider: ModelProvider.instance);
+  final api = AmplifyAPI(modelProvider: ModelProvider.instance);
+  final cognito = AmplifyAuthCognito();
   await Amplify.addPlugins([
-    AmplifyAuthCognito(),
-    AmplifyDataStore(modelProvider: ModelProvider.instance),
-    AmplifyAPI(),
+    cognito,
+    datastore,
+    api,
   ]);
-  await Amplify.configure(amplifyconfig);
+  try {
+    await Amplify.configure(amplifyconfig);
+  } on AmplifyAlreadyConfiguredException {
+    safePrint(
+        'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
+  }
 }

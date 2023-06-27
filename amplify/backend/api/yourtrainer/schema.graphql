@@ -1,7 +1,27 @@
+enum TrainerConnectionState {
+  REQUESTED
+  CONNECTED
+  CLIENT_CLOSED
+  TRAINER_CLOSED
+}
+
+enum ProfileType {
+  CUSTOMER
+  TRAINER
+}
+
+type Profile @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  profileType: ProfileType!
+  profilePicture: AWSURL
+  name: String!
+  userId: ID!
+}
+
 type User @model @auth(rules: [{allow: public}]) {
   id: ID!
-  email: String
-  accountType: String
+  email: String!
+  accountType: String!
 }
 
 type Exercise @model @auth(rules: [{allow: public}]) {
@@ -10,14 +30,12 @@ type Exercise @model @auth(rules: [{allow: public}]) {
   description: String
 }
 
-type Friend @model @auth(rules: [{allow: public}]) {
+type Friendship @model @auth(rules: [{allow: public}]) {
   id: ID!
-  name: String!
-  messageText: String!
-  imageUrl: String
-  time: String!
-  isMessageRead: Boolean!
-  Messages: [Message] @hasMany(indexName: "byFriend", fields: ["id"])
+  Messages: [Message] @hasMany(indexName: "byFriendship", fields: ["id"])
+  Customer: Profile! @hasOne
+  Trainer: Profile! @hasOne
+  connectionState: TrainerConnectionState!
 }
 
 enum MessageDirection {
@@ -29,6 +47,6 @@ type Message @model @auth(rules: [{allow: public}]) {
   id: ID!
   content: String!
   direction: MessageDirection!
-  friend: ID! @index(name: "byFriend")
+  friend: ID! @index(name: "byFriendship")
 }
  

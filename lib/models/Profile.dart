@@ -23,12 +23,14 @@ import 'ModelProvider.dart';
 import 'package:amplify_core/amplify_core.dart' as amplify_core;
 
 
-/** This is an auto generated class representing the User type in your schema. */
-class User extends amplify_core.Model {
-  static const classType = const _UserModelType();
+/** This is an auto generated class representing the Profile type in your schema. */
+class Profile extends amplify_core.Model {
+  static const classType = const _ProfileModelType();
   final String id;
-  final String? _email;
-  final String? _accountType;
+  final ProfileType? _profileType;
+  final String? _profilePicture;
+  final String? _name;
+  final String? _userId;
   final amplify_core.TemporalDateTime? _createdAt;
   final amplify_core.TemporalDateTime? _updatedAt;
 
@@ -39,15 +41,15 @@ class User extends amplify_core.Model {
   @override
   String getId() => id;
   
-  UserModelIdentifier get modelIdentifier {
-      return UserModelIdentifier(
+  ProfileModelIdentifier get modelIdentifier {
+      return ProfileModelIdentifier(
         id: id
       );
   }
   
-  String get email {
+  ProfileType get profileType {
     try {
-      return _email!;
+      return _profileType!;
     } catch(e) {
       throw amplify_core.AmplifyCodeGenModelException(
           amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
@@ -58,9 +60,26 @@ class User extends amplify_core.Model {
     }
   }
   
-  String get accountType {
+  String? get profilePicture {
+    return _profilePicture;
+  }
+  
+  String get name {
     try {
-      return _accountType!;
+      return _name!;
+    } catch(e) {
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
+  }
+  
+  String get userId {
+    try {
+      return _userId!;
     } catch(e) {
       throw amplify_core.AmplifyCodeGenModelException(
           amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
@@ -79,13 +98,15 @@ class User extends amplify_core.Model {
     return _updatedAt;
   }
   
-  const User._internal({required this.id, required email, required accountType, createdAt, updatedAt}): _email = email, _accountType = accountType, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Profile._internal({required this.id, required profileType, profilePicture, required name, required userId, createdAt, updatedAt}): _profileType = profileType, _profilePicture = profilePicture, _name = name, _userId = userId, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory User({String? id, required String email, required String accountType}) {
-    return User._internal(
+  factory Profile({String? id, required ProfileType profileType, String? profilePicture, required String name, required String userId}) {
+    return Profile._internal(
       id: id == null ? amplify_core.UUID.getUUID() : id,
-      email: email,
-      accountType: accountType);
+      profileType: profileType,
+      profilePicture: profilePicture,
+      name: name,
+      userId: userId);
   }
   
   bool equals(Object other) {
@@ -95,10 +116,12 @@ class User extends amplify_core.Model {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is User &&
+    return other is Profile &&
       id == other.id &&
-      _email == other._email &&
-      _accountType == other._accountType;
+      _profileType == other._profileType &&
+      _profilePicture == other._profilePicture &&
+      _name == other._name &&
+      _userId == other._userId;
   }
   
   @override
@@ -108,10 +131,12 @@ class User extends amplify_core.Model {
   String toString() {
     var buffer = new StringBuffer();
     
-    buffer.write("User {");
+    buffer.write("Profile {");
     buffer.write("id=" + "$id" + ", ");
-    buffer.write("email=" + "$_email" + ", ");
-    buffer.write("accountType=" + "$_accountType" + ", ");
+    buffer.write("profileType=" + (_profileType != null ? amplify_core.enumToString(_profileType)! : "null") + ", ");
+    buffer.write("profilePicture=" + "$_profilePicture" + ", ");
+    buffer.write("name=" + "$_name" + ", ");
+    buffer.write("userId=" + "$_userId" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -119,50 +144,62 @@ class User extends amplify_core.Model {
     return buffer.toString();
   }
   
-  User copyWith({String? email, String? accountType}) {
-    return User._internal(
+  Profile copyWith({ProfileType? profileType, String? profilePicture, String? name, String? userId}) {
+    return Profile._internal(
       id: id,
-      email: email ?? this.email,
-      accountType: accountType ?? this.accountType);
+      profileType: profileType ?? this.profileType,
+      profilePicture: profilePicture ?? this.profilePicture,
+      name: name ?? this.name,
+      userId: userId ?? this.userId);
   }
   
-  User copyWithModelFieldValues({
-    ModelFieldValue<String>? email,
-    ModelFieldValue<String>? accountType
+  Profile copyWithModelFieldValues({
+    ModelFieldValue<ProfileType>? profileType,
+    ModelFieldValue<String?>? profilePicture,
+    ModelFieldValue<String>? name,
+    ModelFieldValue<String>? userId
   }) {
-    return User._internal(
+    return Profile._internal(
       id: id,
-      email: email == null ? this.email : email.value,
-      accountType: accountType == null ? this.accountType : accountType.value
+      profileType: profileType == null ? this.profileType : profileType.value,
+      profilePicture: profilePicture == null ? this.profilePicture : profilePicture.value,
+      name: name == null ? this.name : name.value,
+      userId: userId == null ? this.userId : userId.value
     );
   }
   
-  User.fromJson(Map<String, dynamic> json)  
+  Profile.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
-      _email = json['email'],
-      _accountType = json['accountType'],
+      _profileType = amplify_core.enumFromString<ProfileType>(json['profileType'], ProfileType.values),
+      _profilePicture = json['profilePicture'],
+      _name = json['name'],
+      _userId = json['userId'],
       _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'email': _email, 'accountType': _accountType, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'profileType': amplify_core.enumToString(_profileType), 'profilePicture': _profilePicture, 'name': _name, 'userId': _userId, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
     'id': id,
-    'email': _email,
-    'accountType': _accountType,
+    'profileType': _profileType,
+    'profilePicture': _profilePicture,
+    'name': _name,
+    'userId': _userId,
     'createdAt': _createdAt,
     'updatedAt': _updatedAt
   };
 
-  static final amplify_core.QueryModelIdentifier<UserModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<UserModelIdentifier>();
+  static final amplify_core.QueryModelIdentifier<ProfileModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<ProfileModelIdentifier>();
   static final ID = amplify_core.QueryField(fieldName: "id");
-  static final EMAIL = amplify_core.QueryField(fieldName: "email");
-  static final ACCOUNTTYPE = amplify_core.QueryField(fieldName: "accountType");
+  static final PROFILETYPE = amplify_core.QueryField(fieldName: "profileType");
+  static final PROFILEPICTURE = amplify_core.QueryField(fieldName: "profilePicture");
+  static final NAME = amplify_core.QueryField(fieldName: "name");
+  static final USERID = amplify_core.QueryField(fieldName: "userId");
   static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
-    modelSchemaDefinition.name = "User";
-    modelSchemaDefinition.pluralName = "Users";
+    modelSchemaDefinition.name = "Profile";
+    modelSchemaDefinition.pluralName = "Profiles";
     
     modelSchemaDefinition.authRules = [
       amplify_core.AuthRule(
@@ -178,13 +215,25 @@ class User extends amplify_core.Model {
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: User.EMAIL,
+      key: Profile.PROFILETYPE,
+      isRequired: true,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.enumeration)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: Profile.PROFILEPICTURE,
+      isRequired: false,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: Profile.NAME,
       isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: User.ACCOUNTTYPE,
+      key: Profile.USERID,
       isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
@@ -205,29 +254,29 @@ class User extends amplify_core.Model {
   });
 }
 
-class _UserModelType extends amplify_core.ModelType<User> {
-  const _UserModelType();
+class _ProfileModelType extends amplify_core.ModelType<Profile> {
+  const _ProfileModelType();
   
   @override
-  User fromJson(Map<String, dynamic> jsonData) {
-    return User.fromJson(jsonData);
+  Profile fromJson(Map<String, dynamic> jsonData) {
+    return Profile.fromJson(jsonData);
   }
   
   @override
   String modelName() {
-    return 'User';
+    return 'Profile';
   }
 }
 
 /**
  * This is an auto generated class representing the model identifier
- * of [User] in your schema.
+ * of [Profile] in your schema.
  */
-class UserModelIdentifier implements amplify_core.ModelIdentifier<User> {
+class ProfileModelIdentifier implements amplify_core.ModelIdentifier<Profile> {
   final String id;
 
-  /** Create an instance of UserModelIdentifier using [id] the primary key. */
-  const UserModelIdentifier({
+  /** Create an instance of ProfileModelIdentifier using [id] the primary key. */
+  const ProfileModelIdentifier({
     required this.id});
   
   @override
@@ -245,7 +294,7 @@ class UserModelIdentifier implements amplify_core.ModelIdentifier<User> {
   String serializeAsString() => serializeAsMap().values.join('#');
   
   @override
-  String toString() => 'UserModelIdentifier(id: $id)';
+  String toString() => 'ProfileModelIdentifier(id: $id)';
   
   @override
   bool operator ==(Object other) {
@@ -253,7 +302,7 @@ class UserModelIdentifier implements amplify_core.ModelIdentifier<User> {
       return true;
     }
     
-    return other is UserModelIdentifier &&
+    return other is ProfileModelIdentifier &&
       id == other.id;
   }
   

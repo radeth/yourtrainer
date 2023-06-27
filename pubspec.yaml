@@ -33,10 +33,13 @@ dependencies:
   amplify_authenticator: ^1.1.0
   amplify_flutter: ^1.1.1
   amplify_datastore: ^1.1.0-supports-only-mobile+1  
+  cupertino_icons: ^1.0.2
+  collection: ^1.0.0
+  flutter_profile_picture: ^2.0.0
+  flutter_riverpod: ^2.0.0
   flutter:
     sdk: flutter
   go_router: ^8.0.1
-  cupertino_icons: ^1.0.2
   flutter_localizations:
     sdk: flutter
   intl: any

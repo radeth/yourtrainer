@@ -1,4 +1,5 @@
 import 'package:amplify_authenticator/amplify_authenticator.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,6 +7,8 @@ import 'package:go_router/go_router.dart';
 import 'package:yourtrainer/common/routes.dart';
 import 'package:yourtrainer/features/excersie/ui/exercise_details_page.dart';
 import 'package:yourtrainer/features/excersie/ui/exercises_list_page.dart';
+import 'package:yourtrainer/features/excersie/ui/profile_page.dart';
+import 'package:yourtrainer/features/excersie/ui/trainer_list.dart';
 import 'package:yourtrainer/models/Exercise.dart';
 import 'package:yourtrainer/models/Profile.dart';
 import 'features/homePage/home_page.dart';
@@ -62,7 +65,10 @@ class YourTrainerApp extends StatelessWidget {
             return ListView(
               children: [
                 GestureDetector(
-                  onTap: () {}, // TODO: add debug functionality
+                  onTap: () async {
+                    final trainer_profile = await initTrainerProfile();
+                    safePrint('trainer profile: $trainer_profile');
+                  }, // TODO: add debug functionality
                   child: const Text("Become trainer")
                 )
               ],
@@ -76,18 +82,13 @@ class YourTrainerApp extends StatelessWidget {
             return FutureBuilder(
               future: fetchProfile(),
               builder: (BuildContext context, AsyncSnapshot<Profile?> snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
+                if (snapshot.connectionState == ConnectionState.waiting || !snapshot.hasData) {
                   return const Center(child: Text("Loading"));
                 } else {
-                  if (snapshot.hasError || !snapshot.hasData) {
+                  if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else {
-                    final name = snapshot.data?.name;
-                    return ListView(
-                      children: <Widget>[
-                        Text('name: $name'),
-                      ]
-                    );
+                    return ProfilePage(profile: snapshot.data!);
                   }
                 }
               }
@@ -100,7 +101,27 @@ class YourTrainerApp extends StatelessWidget {
           builder: (context, state) {
             return const Text("unimplemented");
           }
-        )
+        ),
+        GoRoute(
+          path: '/trainerList',
+          name: AppRoute.trainerList.name,
+          builder: (context, state) {
+            return FutureBuilder(
+              future: getTrainers(),
+              builder: (BuildContext context, AsyncSnapshot<List<Profile>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting || !snapshot.hasData) {
+                  return const Center(child: Text("Loading"));
+                } else {
+                  if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    return trainer_list_view(snapshot.data!);
+                  }
+                }
+              }
+            );
+          }
+        ),
       ],
       errorBuilder: (context, state) => Scaffold(
         body: Center(

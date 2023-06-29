@@ -1,15 +1,15 @@
 {
-  "dev": {
+  "newdev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-yourtrainer-dev-191021-authRole",
-      "UnauthRoleArn": "arn:aws:iam::859419417247:role/amplify-yourtrainer-dev-191021-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::859419417247:role/amplify-yourtrainer-dev-191021-authRole",
-      "Region": "eu-north-1",
-      "DeploymentBucketName": "amplify-yourtrainer-dev-191021-deployment",
-      "UnauthRoleName": "amplify-yourtrainer-dev-191021-unauthRole",
-      "StackName": "amplify-yourtrainer-dev-191021",
-      "StackId": "arn:aws:cloudformation:eu-north-1:859419417247:stack/amplify-yourtrainer-dev-191021/5b366b70-061f-11ee-b50b-0e5aff402592",
-      "AmplifyAppId": "dyd7sihvn0jbo"
+      "AuthRoleName": "amplify-yourtrainer-newdev-130647-authRole",
+      "UnauthRoleArn": "arn:aws:iam::194422866929:role/amplify-yourtrainer-newdev-130647-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::194422866929:role/amplify-yourtrainer-newdev-130647-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-yourtrainer-newdev-130647-deployment",
+      "UnauthRoleName": "amplify-yourtrainer-newdev-130647-unauthRole",
+      "StackName": "amplify-yourtrainer-newdev-130647",
+      "StackId": "arn:aws:cloudformation:eu-central-1:194422866929:stack/amplify-yourtrainer-newdev-130647/b812e590-1023-11ee-8a82-02a9f2d88572",
+      "AmplifyAppId": "d14op1up76bsxe"
     },
     "categories": {
       "auth": {

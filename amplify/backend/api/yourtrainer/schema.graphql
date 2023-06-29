@@ -10,7 +10,7 @@ enum ProfileType {
   TRAINER
 }
 
-type Profile @model @auth(rules: [{allow: public}]) {
+type Profile @model @auth(rules: [{allow: owner}]) {
   id: ID!
   profileType: ProfileType!
   profilePicture: AWSURL
@@ -18,19 +18,19 @@ type Profile @model @auth(rules: [{allow: public}]) {
   userId: ID!
 }
 
-type User @model @auth(rules: [{allow: public}]) {
+type User @model @auth(rules: [{allow: owner}]) {
   id: ID!
   email: String!
   accountType: String!
 }
 
-type Exercise @model @auth(rules: [{allow: public}]) {
+type Exercise @model @auth(rules: [{allow: owner}]) {
   id: ID!
   name: String!
   description: String
 }
 
-type Friendship @model @auth(rules: [{allow: public}]) {
+type Friendship @model @auth(rules: [{allow: owner}]) {
   id: ID!
   Messages: [Message] @hasMany(indexName: "byFriendship", fields: ["id"])
   Customer: Profile! @hasOne
@@ -43,7 +43,7 @@ enum MessageDirection {
   OUTGOING
 }
 
-type Message @model @auth(rules: [{allow: public}]) {
+type Message @model @auth(rules: [{allow: owner}]) {
   id: ID!
   content: String!
   direction: MessageDirection!

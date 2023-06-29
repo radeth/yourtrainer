@@ -1,6 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:yourtrainer/common/routes.dart';
+import 'package:yourtrainer/features/excersie/ui/trainer_list.dart';
 import 'package:yourtrainer/models/ModelProvider.dart';
 import 'package:yourtrainer/models/api/friendship.dart';
 import 'package:yourtrainer/widgets/conversation_list_item.dart';
@@ -56,8 +59,8 @@ class _ProfileNavViewState extends State<ChatNavView> {
                           TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                     ),
                     GestureDetector(
-                        onTap: () async {
-                          await initFriendList();
+                        onTap: () {
+                          context.pushNamed(AppRoute.trainerList.name);
                         },
                         child: Container(
                           padding: const EdgeInsets.only(

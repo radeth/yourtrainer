@@ -52,8 +52,8 @@ class _ProfilePageState extends State<ProfilePage> {
           //buildUserInfoDisplay(widget.profile.phone, 'Phone', EditPhoneFormPage()),
           //buildUserInfoDisplay(widget.profile.email, 'Email', EditEmailFormPage()),
           Expanded(
-            child: buildAbout(widget.profile),
             flex: 4,
+            child: buildAbout(widget.profile),
           )
         ],
       ),
@@ -63,25 +63,25 @@ class _ProfilePageState extends State<ProfilePage> {
   // Widget builds the display item with the proper formatting to display the user's info
   Widget buildUserInfoDisplay(String getValue, String title, Widget editPage) =>
       Padding(
-          padding: EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.only(bottom: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
                   color: Colors.grey,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 1,
               ),
               Container(
                   width: 350,
                   height: 40,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       border: Border(
                           bottom: BorderSide(
                     color: Colors.grey,
@@ -95,9 +95,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             },
                             child: Text(
                               getValue,
-                              style: TextStyle(fontSize: 16, height: 1.4),
+                              style: const TextStyle(fontSize: 16, height: 1.4),
                             ))),
-                    Icon(
+                    const Icon(
                       Icons.keyboard_arrow_right,
                       color: Colors.grey,
                       size: 40.0,
@@ -112,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Tell Us About Yourself',
             style: TextStyle(
               fontSize: 15,
@@ -124,7 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Container(
               width: 350,
               height: 200,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   border: Border(
                       bottom: BorderSide(
                 color: Colors.grey,

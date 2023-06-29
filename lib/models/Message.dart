@@ -23,12 +23,13 @@ import 'ModelProvider.dart';
 import 'package:amplify_core/amplify_core.dart' as amplify_core;
 
 
-/** This is an auto generated class representing the Exercise type in your schema. */
-class Exercise extends amplify_core.Model {
-  static const classType = const _ExerciseModelType();
+/** This is an auto generated class representing the Message type in your schema. */
+class Message extends amplify_core.Model {
+  static const classType = const _MessageModelType();
   final String id;
-  final String? _name;
-  final String? _description;
+  final String? _content;
+  final MessageDirection? _direction;
+  final String? _friend;
   final amplify_core.TemporalDateTime? _createdAt;
   final amplify_core.TemporalDateTime? _updatedAt;
 
@@ -39,15 +40,15 @@ class Exercise extends amplify_core.Model {
   @override
   String getId() => id;
   
-  ExerciseModelIdentifier get modelIdentifier {
-      return ExerciseModelIdentifier(
+  MessageModelIdentifier get modelIdentifier {
+      return MessageModelIdentifier(
         id: id
       );
   }
   
-  String get name {
+  String get content {
     try {
-      return _name!;
+      return _content!;
     } catch(e) {
       throw amplify_core.AmplifyCodeGenModelException(
           amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
@@ -58,8 +59,30 @@ class Exercise extends amplify_core.Model {
     }
   }
   
-  String? get description {
-    return _description;
+  MessageDirection get direction {
+    try {
+      return _direction!;
+    } catch(e) {
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
+  }
+  
+  String get friend {
+    try {
+      return _friend!;
+    } catch(e) {
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
   }
   
   amplify_core.TemporalDateTime? get createdAt {
@@ -70,13 +93,14 @@ class Exercise extends amplify_core.Model {
     return _updatedAt;
   }
   
-  const Exercise._internal({required this.id, required name, description, createdAt, updatedAt}): _name = name, _description = description, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Message._internal({required this.id, required content, required direction, required friend, createdAt, updatedAt}): _content = content, _direction = direction, _friend = friend, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Exercise({String? id, required String name, String? description}) {
-    return Exercise._internal(
+  factory Message({String? id, required String content, required MessageDirection direction, required String friend}) {
+    return Message._internal(
       id: id == null ? amplify_core.UUID.getUUID() : id,
-      name: name,
-      description: description);
+      content: content,
+      direction: direction,
+      friend: friend);
   }
   
   bool equals(Object other) {
@@ -86,10 +110,11 @@ class Exercise extends amplify_core.Model {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Exercise &&
+    return other is Message &&
       id == other.id &&
-      _name == other._name &&
-      _description == other._description;
+      _content == other._content &&
+      _direction == other._direction &&
+      _friend == other._friend;
   }
   
   @override
@@ -99,10 +124,11 @@ class Exercise extends amplify_core.Model {
   String toString() {
     var buffer = new StringBuffer();
     
-    buffer.write("Exercise {");
+    buffer.write("Message {");
     buffer.write("id=" + "$id" + ", ");
-    buffer.write("name=" + "$_name" + ", ");
-    buffer.write("description=" + "$_description" + ", ");
+    buffer.write("content=" + "$_content" + ", ");
+    buffer.write("direction=" + (_direction != null ? amplify_core.enumToString(_direction)! : "null") + ", ");
+    buffer.write("friend=" + "$_friend" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -110,50 +136,56 @@ class Exercise extends amplify_core.Model {
     return buffer.toString();
   }
   
-  Exercise copyWith({String? name, String? description}) {
-    return Exercise._internal(
+  Message copyWith({String? content, MessageDirection? direction, String? friend}) {
+    return Message._internal(
       id: id,
-      name: name ?? this.name,
-      description: description ?? this.description);
+      content: content ?? this.content,
+      direction: direction ?? this.direction,
+      friend: friend ?? this.friend);
   }
   
-  Exercise copyWithModelFieldValues({
-    ModelFieldValue<String>? name,
-    ModelFieldValue<String?>? description
+  Message copyWithModelFieldValues({
+    ModelFieldValue<String>? content,
+    ModelFieldValue<MessageDirection>? direction,
+    ModelFieldValue<String>? friend
   }) {
-    return Exercise._internal(
+    return Message._internal(
       id: id,
-      name: name == null ? this.name : name.value,
-      description: description == null ? this.description : description.value
+      content: content == null ? this.content : content.value,
+      direction: direction == null ? this.direction : direction.value,
+      friend: friend == null ? this.friend : friend.value
     );
   }
   
-  Exercise.fromJson(Map<String, dynamic> json)  
+  Message.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
-      _name = json['name'],
-      _description = json['description'],
+      _content = json['content'],
+      _direction = amplify_core.enumFromString<MessageDirection>(json['direction'], MessageDirection.values),
+      _friend = json['friend'],
       _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'name': _name, 'description': _description, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'content': _content, 'direction': amplify_core.enumToString(_direction), 'friend': _friend, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
     'id': id,
-    'name': _name,
-    'description': _description,
+    'content': _content,
+    'direction': _direction,
+    'friend': _friend,
     'createdAt': _createdAt,
     'updatedAt': _updatedAt
   };
 
-  static final amplify_core.QueryModelIdentifier<ExerciseModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<ExerciseModelIdentifier>();
+  static final amplify_core.QueryModelIdentifier<MessageModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<MessageModelIdentifier>();
   static final ID = amplify_core.QueryField(fieldName: "id");
-  static final NAME = amplify_core.QueryField(fieldName: "name");
-  static final DESCRIPTION = amplify_core.QueryField(fieldName: "description");
+  static final CONTENT = amplify_core.QueryField(fieldName: "content");
+  static final DIRECTION = amplify_core.QueryField(fieldName: "direction");
+  static final FRIEND = amplify_core.QueryField(fieldName: "friend");
   static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
-    modelSchemaDefinition.name = "Exercise";
-    modelSchemaDefinition.pluralName = "Exercises";
+    modelSchemaDefinition.name = "Message";
+    modelSchemaDefinition.pluralName = "Messages";
     
     modelSchemaDefinition.authRules = [
       amplify_core.AuthRule(
@@ -169,17 +201,27 @@ class Exercise extends amplify_core.Model {
         ])
     ];
     
+    modelSchemaDefinition.indexes = [
+      amplify_core.ModelIndex(fields: const ["friend"], name: "byFriendship")
+    ];
+    
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: Exercise.NAME,
+      key: Message.CONTENT,
       isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: Exercise.DESCRIPTION,
-      isRequired: false,
+      key: Message.DIRECTION,
+      isRequired: true,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.enumeration)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: Message.FRIEND,
+      isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
@@ -199,29 +241,29 @@ class Exercise extends amplify_core.Model {
   });
 }
 
-class _ExerciseModelType extends amplify_core.ModelType<Exercise> {
-  const _ExerciseModelType();
+class _MessageModelType extends amplify_core.ModelType<Message> {
+  const _MessageModelType();
   
   @override
-  Exercise fromJson(Map<String, dynamic> jsonData) {
-    return Exercise.fromJson(jsonData);
+  Message fromJson(Map<String, dynamic> jsonData) {
+    return Message.fromJson(jsonData);
   }
   
   @override
   String modelName() {
-    return 'Exercise';
+    return 'Message';
   }
 }
 
 /**
  * This is an auto generated class representing the model identifier
- * of [Exercise] in your schema.
+ * of [Message] in your schema.
  */
-class ExerciseModelIdentifier implements amplify_core.ModelIdentifier<Exercise> {
+class MessageModelIdentifier implements amplify_core.ModelIdentifier<Message> {
   final String id;
 
-  /** Create an instance of ExerciseModelIdentifier using [id] the primary key. */
-  const ExerciseModelIdentifier({
+  /** Create an instance of MessageModelIdentifier using [id] the primary key. */
+  const MessageModelIdentifier({
     required this.id});
   
   @override
@@ -239,7 +281,7 @@ class ExerciseModelIdentifier implements amplify_core.ModelIdentifier<Exercise> 
   String serializeAsString() => serializeAsMap().values.join('#');
   
   @override
-  String toString() => 'ExerciseModelIdentifier(id: $id)';
+  String toString() => 'MessageModelIdentifier(id: $id)';
   
   @override
   bool operator ==(Object other) {
@@ -247,7 +289,7 @@ class ExerciseModelIdentifier implements amplify_core.ModelIdentifier<Exercise> 
       return true;
     }
     
-    return other is ExerciseModelIdentifier &&
+    return other is MessageModelIdentifier &&
       id == other.id;
   }
   

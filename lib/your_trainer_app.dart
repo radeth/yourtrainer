@@ -9,23 +9,31 @@ import 'package:yourtrainer/features/excersie/ui/exercise_details_page.dart';
 import 'package:yourtrainer/features/excersie/ui/exercises_list_page.dart';
 import 'package:yourtrainer/features/excersie/ui/profile_page.dart';
 import 'package:yourtrainer/features/excersie/ui/trainer_list.dart';
-import 'package:yourtrainer/models/Exercise.dart';
-import 'package:yourtrainer/models/Profile.dart';
-import 'features/homePage/home_page.dart';
 import 'package:yourtrainer/common/colors.dart' as constants;
 import 'package:yourtrainer/models/api/profile.dart';
-import 'dart:ui';
+import 'package:yourtrainer/features/homePage/ui/home_page.dart';
+import 'package:yourtrainer/main.dart';
+import 'package:yourtrainer/models/ModelProvider.dart';
 
 class YourTrainerApp extends StatelessWidget {
   const YourTrainerApp({
     required this.isAmplifySuccessfullyConfigured,
     Key? key,
   }) : super(key: key);
-
   final bool isAmplifySuccessfullyConfigured;
-
   @override
   Widget build(BuildContext context) {
+    Amplify.Hub.listen(HubChannel.Auth, (event) async {
+      if (event.eventName == "SIGNED_IN") {
+        final newUser = User(
+            accountType: AccountType.client.name, email: event.payload!.signInDetails.toJson()['username'] as String);
+        try {
+          await Amplify.DataStore.save(newUser);
+        } on DataStoreException catch (e) {
+          safePrint('Something went wrong saving model: ${e.message}');
+        }
+      }
+    });
     final router = GoRouter(
       routes: [
         GoRoute(

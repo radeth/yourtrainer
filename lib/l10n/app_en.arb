@@ -17,4 +17,5 @@
   "activity": "Activity",
   "chat": "Chat",
   "debugMenu": "Debug Menu"
+  "logout":"Logout"
 }

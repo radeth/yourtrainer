@@ -17,7 +17,16 @@ Future<void> main() async {
   } on AmplifyAlreadyConfiguredException {
     debugPrint('Amplify configuration failed.');
   }
-
+  // Amplify.Hub.listen(HubChannel.Auth, (event) async {
+  //   if (event.eventName == "SIGNED_IN") {
+  //     final newUser = User(accountType: AccountType.client.name, email: event.payload?.username);
+  //     try {
+  //       await Amplify.DataStore.save(newUser);
+  //     } on DataStoreException catch (e) {
+  //       safePrint('Something went wrong saving model: ${e.message}');
+  //     }
+  //   }
+  // });
   runApp(
     ProviderScope(
       child: YourTrainerApp(
@@ -26,6 +35,8 @@ Future<void> main() async {
     ),
   );
 }
+
+enum AccountType { client }
 
 Future<void> _configureAmplify() async {
   final datastore = AmplifyDataStore(modelProvider: ModelProvider.instance);

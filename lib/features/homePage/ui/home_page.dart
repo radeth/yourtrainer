@@ -1,13 +1,25 @@
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:yourtrainer/features/homePage/profile_nav_view.dart';
-import 'package:yourtrainer/features/homePage/chat_nav_view.dart';
+import 'package:yourtrainer/features/homePage/ui/profile_nav_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
+}
+
+enum SampleItem { logout }
+
+Future<void> signOutCurrentUser() async {
+  final result = await Amplify.Auth.signOut();
+  if (result is CognitoCompleteSignOut) {
+    safePrint('Sign out completed successfully');
+  } else if (result is CognitoFailedSignOut) {
+    safePrint('Error signing user out: ${result.exception.message}');
+  }
 }
 
 class _HomePageState extends State<HomePage> {
@@ -24,11 +36,7 @@ class _HomePageState extends State<HomePage> {
       'Index 3: aktywnosc',
       style: optionStyle,
     ),
-    Text(
-      'Index 4: trener',
-      style: optionStyle,
-    ),
-    ChatNavView(),
+    TrainerNavView(),
   ];
 
   void _onItemTapped(int index) {
@@ -37,12 +45,24 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  SampleItem? selectedMenu;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.appTitle),
-        // actions: [IconButton(onPressed: onPressed, icon: Ic)],
+        actions: [
+          PopupMenuButton<SampleItem>(
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<SampleItem>>[
+              PopupMenuItem<SampleItem>(
+                value: SampleItem.logout,
+                child: Text(AppLocalizations.of(context)!.logout),
+                onTap: () => signOutCurrentUser(),
+              )
+            ],
+          )
+        ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -78,6 +98,35 @@ class _HomePageState extends State<HomePage> {
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+class TrainerNavView extends StatelessWidget {
+  const TrainerNavView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: const TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.sports)),
+                Tab(icon: Icon(Icons.chat)),
+              ],
+            ),
+          ),
+          body: const TabBarView(
+            children: [
+              Icon(Icons.sports),
+              Icon(Icons.chat),
+            ],
+          ),
+        ),
       ),
     );
   }

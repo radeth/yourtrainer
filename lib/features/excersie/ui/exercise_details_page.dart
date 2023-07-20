@@ -62,22 +62,20 @@ class ExerciseDetailsPage extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                onPressed: () {
-                  context.goNamed(AppRoute.home.name);
-                },
                 icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  context.pop();
+                },
               ),
               IconButton(
+                icon: const Icon(Icons.delete),
                 onPressed: () {
                   deleteexercise(context, ref, exercise).then((value) {
                     if (value) {
-                      context.goNamed(
-                        AppRoute.home.name,
-                      );
+                      context.pop();
                     }
                   });
                 },
-                icon: const Icon(Icons.delete),
               ),
             ],
           ),
@@ -146,9 +144,7 @@ class ExerciseDetailsPage extends HookConsumerWidget {
                           ref
                               .read(exerciseControllerProvider)
                               .edit(updatedExercise);
-                          context.goNamed(
-                            AppRoute.home.name,
-                          );
+                          context.pop();
                         }
                       } //,
                       ),

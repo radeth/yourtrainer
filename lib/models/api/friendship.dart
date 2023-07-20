@@ -4,11 +4,63 @@ import 'package:collection/collection.dart';
 import 'package:yourtrainer/models/ModelProvider.dart';
 import 'package:yourtrainer/models/api/profile.dart';
 
+const listFriendships = 'listFriendships';
+
+const conversationListGraphQlQuery = '''
+query GetConversationList {
+  $listFriendships {
+    nextToken
+    startedAt
+    items {
+      Customer {
+        id
+        name
+        owner
+        profilePicture
+        profileType
+        updatedAt
+        userId
+        _deleted
+        _lastChangedAt
+        _version
+        createdAt
+      }
+      Trainer {
+        _deleted
+        _lastChangedAt
+        _version
+        createdAt
+        id
+        name
+        owner
+        profilePicture
+        profileType
+        updatedAt
+        userId
+      }
+      updatedAt
+      owner
+      id
+      friendshipTrainerId
+      friendshipCustomerId
+      createdAt
+      connectionState
+      _version
+      _lastChangedAt
+      _deleted
+    }
+  }
+}''';
+
 Future<List<Friendship>> queryPersonalTrainerConnections() async {
   try {
-    final request = ModelQueries.list(Friendship.classType);
+    final request = GraphQLRequest<PaginatedResult<Friendship>>(
+        document:conversationListGraphQlQuery,
+        modelType: const PaginatedModelType(Friendship.classType),
+        decodePath: listFriendships,
+      );
+    //ModelQueries.list(Friendship.classType);
     final response = await Amplify.API.query(request: request).response;
-    
     safePrint("got : $response");
 
     final friends = response.data?.items;
@@ -16,6 +68,7 @@ Future<List<Friendship>> queryPersonalTrainerConnections() async {
       safePrint('errors: ${response.errors}');
       return const [];
     }
+    
 
     return friends
       .where((Friendship? e) {
@@ -39,7 +92,6 @@ Future<void> initFriendList() async {
   final myself = (await getUserProfile())!;
   await sendFriendRequest(myself, myself);
 }
-
 
 Future<void> sendFriendRequest(
   Profile client,

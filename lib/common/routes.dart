@@ -5,4 +5,5 @@ enum AppRoute {
   debugMenu,
   profile,
   trainerProfile,
+  trainerList,
 }

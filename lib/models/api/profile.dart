@@ -5,7 +5,6 @@ import 'package:yourtrainer/models/ModelProvider.dart';
 Future<Profile?> fetchProfile() async {
   var profile = await getUserProfile();
   safePrint('Existing profile: $profile');
-  
   if (profile == null) {
     profile = await _initProfile();
     safePrint('New profile: $profile');
@@ -24,11 +23,38 @@ Future<Profile?> _initProfile() async {
     );
     final request = ModelMutations.create(profile);
     final response = await Amplify.API.mutate(request: request).response;
-    
+
+    safePrint('_initProfile: $response');
+
     return response.data;
   } on ApiException catch (e) {
     safePrint("initProfile failed $e");
   }
+  return null;
+}
+
+Future<Profile?> initTrainerProfile() async {
+  final customer_profile = await getUserProfile();
+  if (customer_profile == null) {
+    return null;
+  }
+  final trainer_profile = Profile(
+      name: customer_profile.name,
+      userId: customer_profile.userId,
+      profilePicture: customer_profile.profilePicture,
+      profileType: ProfileType.TRAINER);
+
+  try {
+    final request = ModelMutations.create(trainer_profile);
+    final response = await Amplify.API.mutate(request: request).response;
+
+    safePrint('initTrainerProfile: $response');
+
+    return response.data;
+  } on ApiException catch (e) {
+    safePrint('initTrainerProfile failed: $e');
+  }
+
   return null;
 }
 
@@ -43,7 +69,6 @@ Future<Profile?> getProfile(String user_id) async {
 
     final request = ModelQueries.list(Profile.classType, where: queryPredicate);
     final response = await Amplify.API.query(request: request).response;
-    
     if (response.data == null || response.data!.items.isEmpty) {
       return null;
     } else if (response.data?.items.length == 1) {

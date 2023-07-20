@@ -77,7 +77,7 @@ class ExerciseListTitle extends StatelessWidget {
           subtitle: Text(exercise.description!),
           trailing: const Icon(Icons.keyboard_arrow_right),
           onTap: () =>
-              context.goNamed(AppRoute.exerciseDetails.name, pathParameters: {'id': exercise.id}, extra: exercise),
+              context.pushNamed(AppRoute.exerciseDetails.name, pathParameters: {'id': exercise.id}, extra: exercise),
           leading: const Icon(Icons.sports_martial_arts)),
     );
   }

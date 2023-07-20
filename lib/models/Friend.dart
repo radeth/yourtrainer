@@ -20,14 +20,12 @@
 // ignore_for_file: public_member_api_docs, annotate_overrides, dead_code, dead_codepublic_member_api_docs, depend_on_referenced_packages, file_names, library_private_types_in_public_api, no_leading_underscores_for_library_prefixes, no_leading_underscores_for_local_identifiers, non_constant_identifier_names, null_check_on_nullable_type_parameter, prefer_adjacent_string_concatenation, prefer_const_constructors, prefer_if_null_operators, prefer_interpolation_to_compose_strings, slash_for_doc_comments, sort_child_properties_last, unnecessary_const, unnecessary_constructor_name, unnecessary_late, unnecessary_new, unnecessary_null_aware_assignments, unnecessary_nullable_for_final_variable_declarations, unnecessary_string_interpolations, use_build_context_synchronously
 
 import 'ModelProvider.dart';
-import 'package:amplify_core/amplify_core.dart';
+import 'package:amplify_core/amplify_core.dart' as amplify_core;
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 
 
 /** This is an auto generated class representing the Friend type in your schema. */
-@immutable
-class Friend extends Model {
+class Friend extends amplify_core.Model {
   static const classType = const _FriendModelType();
   final String id;
   final String? _name;
@@ -36,8 +34,8 @@ class Friend extends Model {
   final String? _time;
   final bool? _isMessageRead;
   final List<Message>? _Messages;
-  final TemporalDateTime? _createdAt;
-  final TemporalDateTime? _updatedAt;
+  final amplify_core.TemporalDateTime? _createdAt;
+  final amplify_core.TemporalDateTime? _updatedAt;
 
   @override
   getInstanceType() => classType;
@@ -56,10 +54,10 @@ class Friend extends Model {
     try {
       return _name!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -69,10 +67,10 @@ class Friend extends Model {
     try {
       return _messageText!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -86,10 +84,10 @@ class Friend extends Model {
     try {
       return _time!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -99,10 +97,10 @@ class Friend extends Model {
     try {
       return _isMessageRead!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -112,11 +110,11 @@ class Friend extends Model {
     return _Messages;
   }
   
-  TemporalDateTime? get createdAt {
+  amplify_core.TemporalDateTime? get createdAt {
     return _createdAt;
   }
   
-  TemporalDateTime? get updatedAt {
+  amplify_core.TemporalDateTime? get updatedAt {
     return _updatedAt;
   }
   
@@ -124,7 +122,7 @@ class Friend extends Model {
   
   factory Friend({String? id, required String name, required String messageText, String? imageUrl, required String time, required bool isMessageRead, List<Message>? Messages}) {
     return Friend._internal(
-      id: id == null ? UUID.getUUID() : id,
+      id: id == null ? amplify_core.UUID.getUUID() : id,
       name: name,
       messageText: messageText,
       imageUrl: imageUrl,
@@ -182,6 +180,25 @@ class Friend extends Model {
       Messages: Messages ?? this.Messages);
   }
   
+  Friend copyWithModelFieldValues({
+    ModelFieldValue<String>? name,
+    ModelFieldValue<String>? messageText,
+    ModelFieldValue<String?>? imageUrl,
+    ModelFieldValue<String>? time,
+    ModelFieldValue<bool>? isMessageRead,
+    ModelFieldValue<List<Message>?>? Messages
+  }) {
+    return Friend._internal(
+      id: id,
+      name: name == null ? this.name : name.value,
+      messageText: messageText == null ? this.messageText : messageText.value,
+      imageUrl: imageUrl == null ? this.imageUrl : imageUrl.value,
+      time: time == null ? this.time : time.value,
+      isMessageRead: isMessageRead == null ? this.isMessageRead : isMessageRead.value,
+      Messages: Messages == null ? this.Messages : Messages.value
+    );
+  }
+  
   Friend.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
       _name = json['name'],
@@ -195,98 +212,106 @@ class Friend extends Model {
           .map((e) => Message.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
           .toList()
         : null,
-      _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
-      _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
+      _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
+      _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
     'id': id, 'name': _name, 'messageText': _messageText, 'imageUrl': _imageUrl, 'time': _time, 'isMessageRead': _isMessageRead, 'Messages': _Messages?.map((Message? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'name': _name, 'messageText': _messageText, 'imageUrl': _imageUrl, 'time': _time, 'isMessageRead': _isMessageRead, 'Messages': _Messages, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+    'id': id,
+    'name': _name,
+    'messageText': _messageText,
+    'imageUrl': _imageUrl,
+    'time': _time,
+    'isMessageRead': _isMessageRead,
+    'Messages': _Messages,
+    'createdAt': _createdAt,
+    'updatedAt': _updatedAt
   };
 
-  static final QueryModelIdentifier<FriendModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<FriendModelIdentifier>();
-  static final QueryField ID = QueryField(fieldName: "id");
-  static final QueryField NAME = QueryField(fieldName: "name");
-  static final QueryField MESSAGETEXT = QueryField(fieldName: "messageText");
-  static final QueryField IMAGEURL = QueryField(fieldName: "imageUrl");
-  static final QueryField TIME = QueryField(fieldName: "time");
-  static final QueryField ISMESSAGEREAD = QueryField(fieldName: "isMessageRead");
-  static final QueryField MESSAGES = QueryField(
+  static final amplify_core.QueryModelIdentifier<FriendModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<FriendModelIdentifier>();
+  static final ID = amplify_core.QueryField(fieldName: "id");
+  static final NAME = amplify_core.QueryField(fieldName: "name");
+  static final MESSAGETEXT = amplify_core.QueryField(fieldName: "messageText");
+  static final IMAGEURL = amplify_core.QueryField(fieldName: "imageUrl");
+  static final TIME = amplify_core.QueryField(fieldName: "time");
+  static final ISMESSAGEREAD = amplify_core.QueryField(fieldName: "isMessageRead");
+  static final MESSAGES = amplify_core.QueryField(
     fieldName: "Messages",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Message'));
-  static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'Message'));
+  static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Friend";
     modelSchemaDefinition.pluralName = "Friends";
     
     modelSchemaDefinition.authRules = [
-      AuthRule(
-        authStrategy: AuthStrategy.PUBLIC,
-        operations: [
-          ModelOperation.CREATE,
-          ModelOperation.UPDATE,
-          ModelOperation.DELETE,
-          ModelOperation.READ
+      amplify_core.AuthRule(
+        authStrategy: amplify_core.AuthStrategy.PUBLIC,
+        operations: const [
+          amplify_core.ModelOperation.CREATE,
+          amplify_core.ModelOperation.UPDATE,
+          amplify_core.ModelOperation.DELETE,
+          amplify_core.ModelOperation.READ
         ])
     ];
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.id());
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Friend.NAME,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Friend.MESSAGETEXT,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Friend.IMAGEURL,
       isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Friend.TIME,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Friend.ISMESSAGEREAD,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.bool)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.bool)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.hasMany(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.hasMany(
       key: Friend.MESSAGES,
       isRequired: false,
       ofModelName: 'Message',
       associatedKey: Message.FRIEND
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'createdAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'updatedAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
   });
 }
 
-class _FriendModelType extends ModelType<Friend> {
+class _FriendModelType extends amplify_core.ModelType<Friend> {
   const _FriendModelType();
   
   @override
@@ -304,8 +329,7 @@ class _FriendModelType extends ModelType<Friend> {
  * This is an auto generated class representing the model identifier
  * of [Friend] in your schema.
  */
-@immutable
-class FriendModelIdentifier implements ModelIdentifier<Friend> {
+class FriendModelIdentifier implements amplify_core.ModelIdentifier<Friend> {
   final String id;
 
   /** Create an instance of FriendModelIdentifier using [id] the primary key. */

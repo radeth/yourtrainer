@@ -21,6 +21,7 @@
 
 import 'ModelProvider.dart';
 import 'package:amplify_core/amplify_core.dart' as amplify_core;
+import 'package:collection/collection.dart';
 
 
 /** This is an auto generated class representing the Exercise type in your schema. */
@@ -29,6 +30,8 @@ class Exercise extends amplify_core.Model {
   final String id;
   final String? _name;
   final String? _description;
+  final List<ExerciseStep>? _singleSeries;
+  final int? _seriesNumber;
   final amplify_core.TemporalDateTime? _createdAt;
   final amplify_core.TemporalDateTime? _updatedAt;
 
@@ -62,6 +65,14 @@ class Exercise extends amplify_core.Model {
     return _description;
   }
   
+  List<ExerciseStep>? get singleSeries {
+    return _singleSeries;
+  }
+  
+  int? get seriesNumber {
+    return _seriesNumber;
+  }
+  
   amplify_core.TemporalDateTime? get createdAt {
     return _createdAt;
   }
@@ -70,13 +81,15 @@ class Exercise extends amplify_core.Model {
     return _updatedAt;
   }
   
-  const Exercise._internal({required this.id, required name, description, createdAt, updatedAt}): _name = name, _description = description, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Exercise._internal({required this.id, required name, description, singleSeries, seriesNumber, createdAt, updatedAt}): _name = name, _description = description, _singleSeries = singleSeries, _seriesNumber = seriesNumber, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Exercise({String? id, required String name, String? description}) {
+  factory Exercise({String? id, required String name, String? description, List<ExerciseStep>? singleSeries, int? seriesNumber}) {
     return Exercise._internal(
       id: id == null ? amplify_core.UUID.getUUID() : id,
       name: name,
-      description: description);
+      description: description,
+      singleSeries: singleSeries != null ? List<ExerciseStep>.unmodifiable(singleSeries) : singleSeries,
+      seriesNumber: seriesNumber);
   }
   
   bool equals(Object other) {
@@ -89,7 +102,9 @@ class Exercise extends amplify_core.Model {
     return other is Exercise &&
       id == other.id &&
       _name == other._name &&
-      _description == other._description;
+      _description == other._description &&
+      DeepCollectionEquality().equals(_singleSeries, other._singleSeries) &&
+      _seriesNumber == other._seriesNumber;
   }
   
   @override
@@ -103,6 +118,8 @@ class Exercise extends amplify_core.Model {
     buffer.write("id=" + "$id" + ", ");
     buffer.write("name=" + "$_name" + ", ");
     buffer.write("description=" + "$_description" + ", ");
+    buffer.write("singleSeries=" + (_singleSeries != null ? _singleSeries!.toString() : "null") + ", ");
+    buffer.write("seriesNumber=" + (_seriesNumber != null ? _seriesNumber!.toString() : "null") + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -110,21 +127,27 @@ class Exercise extends amplify_core.Model {
     return buffer.toString();
   }
   
-  Exercise copyWith({String? name, String? description}) {
+  Exercise copyWith({String? name, String? description, List<ExerciseStep>? singleSeries, int? seriesNumber}) {
     return Exercise._internal(
       id: id,
       name: name ?? this.name,
-      description: description ?? this.description);
+      description: description ?? this.description,
+      singleSeries: singleSeries ?? this.singleSeries,
+      seriesNumber: seriesNumber ?? this.seriesNumber);
   }
   
   Exercise copyWithModelFieldValues({
     ModelFieldValue<String>? name,
-    ModelFieldValue<String?>? description
+    ModelFieldValue<String?>? description,
+    ModelFieldValue<List<ExerciseStep>?>? singleSeries,
+    ModelFieldValue<int?>? seriesNumber
   }) {
     return Exercise._internal(
       id: id,
       name: name == null ? this.name : name.value,
-      description: description == null ? this.description : description.value
+      description: description == null ? this.description : description.value,
+      singleSeries: singleSeries == null ? this.singleSeries : singleSeries.value,
+      seriesNumber: seriesNumber == null ? this.seriesNumber : seriesNumber.value
     );
   }
   
@@ -132,17 +155,26 @@ class Exercise extends amplify_core.Model {
     : id = json['id'],
       _name = json['name'],
       _description = json['description'],
+      _singleSeries = json['singleSeries'] is List
+        ? (json['singleSeries'] as List)
+          .where((e) => e != null)
+          .map((e) => ExerciseStep.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
+          .toList()
+        : null,
+      _seriesNumber = (json['seriesNumber'] as num?)?.toInt(),
       _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'name': _name, 'description': _description, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'name': _name, 'description': _description, 'singleSeries': _singleSeries?.map((ExerciseStep? e) => e?.toJson()).toList(), 'seriesNumber': _seriesNumber, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
     'id': id,
     'name': _name,
     'description': _description,
+    'singleSeries': _singleSeries,
+    'seriesNumber': _seriesNumber,
     'createdAt': _createdAt,
     'updatedAt': _updatedAt
   };
@@ -151,6 +183,8 @@ class Exercise extends amplify_core.Model {
   static final ID = amplify_core.QueryField(fieldName: "id");
   static final NAME = amplify_core.QueryField(fieldName: "name");
   static final DESCRIPTION = amplify_core.QueryField(fieldName: "description");
+  static final SINGLESERIES = amplify_core.QueryField(fieldName: "singleSeries");
+  static final SERIESNUMBER = amplify_core.QueryField(fieldName: "seriesNumber");
   static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Exercise";
     modelSchemaDefinition.pluralName = "Exercises";
@@ -178,6 +212,19 @@ class Exercise extends amplify_core.Model {
       key: Exercise.DESCRIPTION,
       isRequired: false,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.embedded(
+      fieldName: 'singleSeries',
+      isRequired: false,
+      isArray: true,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.embeddedCollection, ofCustomTypeName: 'ExerciseStep')
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: Exercise.SERIESNUMBER,
+      isRequired: false,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.int)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(

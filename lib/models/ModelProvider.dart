@@ -25,8 +25,13 @@ import 'Friendship.dart';
 import 'Message.dart';
 import 'Profile.dart';
 import 'User.dart';
+import 'ExerciseStep.dart';
+import 'ExerciseToken.dart';
 
 export 'Exercise.dart';
+export 'ExerciseStep.dart';
+export 'ExerciseToken.dart';
+export 'ExerciseTokenType.dart';
 export 'Friendship.dart';
 export 'Message.dart';
 export 'MessageDirection.dart';
@@ -37,11 +42,11 @@ export 'User.dart';
 
 class ModelProvider implements amplify_core.ModelProviderInterface {
   @override
-  String version = "dc57207503491fbfe2e04ee314e6add1";
+  String version = "6095318246c8e0c2727023a68225922a";
   @override
   List<amplify_core.ModelSchema> modelSchemas = [Exercise.schema, Friendship.schema, Message.schema, Profile.schema, User.schema];
   @override
-  List<amplify_core.ModelSchema> customTypeSchemas = [];
+  List<amplify_core.ModelSchema> customTypeSchemas = [ExerciseStep.schema, ExerciseToken.schema];
   static final ModelProvider _instance = ModelProvider();
 
   static ModelProvider get instance => _instance;

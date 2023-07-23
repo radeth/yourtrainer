@@ -1,3 +1,20 @@
+type ExerciseStep {
+  tokens: [ExerciseToken]
+}
+
+type ExerciseToken {
+  type: ExerciseTokenType
+  value: String
+}
+
+type Exercise @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  description: String
+  singleSeries: [ExerciseStep]
+  seriesNumber: Int
+}
+
 enum TrainerConnectionState {
   REQUESTED
   CONNECTED
@@ -5,9 +22,12 @@ enum TrainerConnectionState {
   TRAINER_CLOSED
 }
 
-enum ProfileType {
-  CUSTOMER
-  TRAINER
+enum ExerciseTokenType {
+  REP
+  WEIGTH
+  TIME
+  TEXT
+  PAUSE
 }
 
 type Profile @model @auth(rules: [{allow: public}]) {
@@ -24,10 +44,9 @@ type User @model @auth(rules: [{allow: public}]) {
   accountType: String!
 }
 
-type Exercise @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  name: String!
-  description: String
+enum ProfileType {
+  CUSTOMER
+  TRAINER
 }
 
 type Friendship @model @auth(rules: [{allow: public}]) {

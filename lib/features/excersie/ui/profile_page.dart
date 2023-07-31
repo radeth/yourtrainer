@@ -48,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 fontsize: 40,
                 img: widget.profile.profilePicture),
           ),
-          buildUserInfoDisplay(widget.profile.name, 'Name', Text("xd")),
+          buildUserInfoDisplay(widget.profile.name, 'Name', const Text("xd")),
           //buildUserInfoDisplay(widget.profile.phone, 'Phone', EditPhoneFormPage()),
           //buildUserInfoDisplay(widget.profile.email, 'Email', EditEmailFormPage()),
           Expanded(
@@ -108,7 +108,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // Widget builds the About Me Section
   Widget buildAbout(Profile user) => Padding(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

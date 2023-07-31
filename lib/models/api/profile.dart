@@ -14,11 +14,11 @@ Future<Profile?> fetchProfile() async {
 }
 
 Future<Profile?> _initProfile() async {
-  final user_identity = await Amplify.Auth.getCurrentUser();
+  final userIdentity = await Amplify.Auth.getCurrentUser();
   try {
     final profile = Profile(
       name: "MeMeMe", // TODO: profile init
-      userId: user_identity.userId,
+      userId: userIdentity.userId,
       profileType: ProfileType.CUSTOMER,
     );
     final request = ModelMutations.create(profile);
@@ -34,18 +34,18 @@ Future<Profile?> _initProfile() async {
 }
 
 Future<Profile?> initTrainerProfile() async {
-  final customer_profile = await getUserProfile();
-  if (customer_profile == null) {
+  final customerProfile = await getUserProfile();
+  if (customerProfile == null) {
     return null;
   }
-  final trainer_profile = Profile(
-      name: customer_profile.name,
-      userId: customer_profile.userId,
-      profilePicture: customer_profile.profilePicture,
+  final trainerProfile = Profile(
+      name: customerProfile.name,
+      userId: customerProfile.userId,
+      profilePicture: customerProfile.profilePicture,
       profileType: ProfileType.TRAINER);
 
   try {
-    final request = ModelMutations.create(trainer_profile);
+    final request = ModelMutations.create(trainerProfile);
     final response = await Amplify.API.mutate(request: request).response;
 
     safePrint('initTrainerProfile: $response');
@@ -59,13 +59,13 @@ Future<Profile?> initTrainerProfile() async {
 }
 
 Future<Profile?> getUserProfile() async {
-  final user_identity = await Amplify.Auth.getCurrentUser();
-  return getProfile(user_identity.userId);
+  final userIdentity = await Amplify.Auth.getCurrentUser();
+  return getProfile(userIdentity.userId);
 }
 
-Future<Profile?> getProfile(String user_id) async {
+Future<Profile?> getProfile(String userId) async {
   try {
-    final queryPredicate = Profile.USERID.eq(user_id);
+    final queryPredicate = Profile.USERID.eq(userId);
 
     final request = ModelQueries.list(Profile.classType, where: queryPredicate);
     final response = await Amplify.API.query(request: request).response;

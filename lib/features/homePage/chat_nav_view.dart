@@ -98,7 +98,7 @@ class _ProfileNavViewState extends State<ChatNavView> {
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return ConversationList(
-                  name: friends[index].Trainer!.name,
+                  name: friends[index].Trainer.name,
                   friend_id: friends[index].id,
                   message_text: () { 
                     switch (friends[index].connectionState) {

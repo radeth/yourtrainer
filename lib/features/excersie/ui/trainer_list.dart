@@ -33,7 +33,7 @@ class _TrainerCardState extends State<TrainerCard> {
   }
 }
 
-Widget show_trainer_list(List<Profile> trainers) {
+Widget showTrainerList(List<Profile> trainers) {
   return ListView.builder(
   shrinkWrap: true,
     itemCount: trainers.length,
@@ -42,7 +42,7 @@ Widget show_trainer_list(List<Profile> trainers) {
     });
 }
 
-Widget trainer_list_view(List<Profile> trainers) {
+Widget trainerListView(List<Profile> trainers) {
   return Scaffold(
     body: SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
@@ -51,7 +51,7 @@ Widget trainer_list_view(List<Profile> trainers) {
         children: <Widget>[
           const SafeArea(
             child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 10),
+              padding: EdgeInsets.only(left: 16, right: 16, top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -63,7 +63,7 @@ Widget trainer_list_view(List<Profile> trainers) {
               ),
             ),
           ),
-          show_trainer_list(trainers),
+          showTrainerList(trainers),
         ],
       ),
     ),
@@ -77,7 +77,7 @@ Future<List<Profile>> getTrainers() async {
     final request = ModelQueries.list(Profile.classType);
     final response = await Amplify.API.query(request: request).response;
     
-    final trainers = await response.data?.items;
+    final trainers = response.data?.items;
     if (trainers == null) {
       safePrint('errors: ${response.errors}');
       return const [];

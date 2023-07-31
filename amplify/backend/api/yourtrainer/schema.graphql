@@ -3,7 +3,7 @@ type ExerciseStep {
 }
 
 type ExerciseToken {
-  type: ExerciseTokenType
+  type: ExerciseTokenType!
   value: String
 }
 

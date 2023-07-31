@@ -2,7 +2,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:yourtrainer/features/homePage/ui/profile_nav_view.dart';
+import 'package:yourtrainer/features/homePage/profile_nav_view.dart';
 import 'package:yourtrainer/features/homePage/chat_nav_view.dart';
 
 class HomePage extends StatefulWidget {

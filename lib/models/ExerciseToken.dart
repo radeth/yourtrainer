@@ -28,17 +28,26 @@ class ExerciseToken {
   final ExerciseTokenType? _type;
   final String? _value;
 
-  ExerciseTokenType? get type {
-    return _type;
+  ExerciseTokenType get type {
+    try {
+      return _type!;
+    } catch(e) {
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
   }
   
   String? get value {
     return _value;
   }
   
-  const ExerciseToken._internal({type, value}): _type = type, _value = value;
+  const ExerciseToken._internal({required type, value}): _type = type, _value = value;
   
-  factory ExerciseToken({ExerciseTokenType? type, String? value}) {
+  factory ExerciseToken({required ExerciseTokenType type, String? value}) {
     return ExerciseToken._internal(
       type: type,
       value: value);
@@ -78,7 +87,7 @@ class ExerciseToken {
   }
   
   ExerciseToken copyWithModelFieldValues({
-    ModelFieldValue<ExerciseTokenType?>? type,
+    ModelFieldValue<ExerciseTokenType>? type,
     ModelFieldValue<String?>? value
   }) {
     return ExerciseToken._internal(
@@ -106,7 +115,7 @@ class ExerciseToken {
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.customTypeField(
       fieldName: 'type',
-      isRequired: false,
+      isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.enumeration)
     ));
     

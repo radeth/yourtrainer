@@ -17,5 +17,7 @@
   "activity": "Activity",
   "logout":"Logout",
   "chat": "Chat",
-  "debugMenu": "Debug Menu"
+  "debugMenu": "Debug Menu",
+  "reps": "Reps#",
+  "addStep": "Add step"
 }

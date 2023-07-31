@@ -59,6 +59,8 @@ class ExercisesDataStoreService {
       final newExercise = oldExercise.copyWith(
         name: updatedExercise.name,
         description: updatedExercise.description,
+        seriesNumber: updatedExercise.seriesNumber,
+        singleSeries: updatedExercise.singleSeries,
       );
 
       await Amplify.DataStore.save(newExercise);

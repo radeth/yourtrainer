@@ -14,10 +14,6 @@ import 'package:yourtrainer/models/api/profile.dart';
 import 'package:yourtrainer/features/homePage/ui/home_page.dart';
 import 'package:yourtrainer/main.dart';
 import 'package:yourtrainer/models/ModelProvider.dart';
-import 'package:yourtrainer/models/Profile.dart';
-import 'package:yourtrainer/common/colors.dart' as constants;
-import 'package:yourtrainer/models/api/profile.dart';
-import 'dart:ui';
 
 class YourTrainerApp extends StatelessWidget {
   const YourTrainerApp({
@@ -78,8 +74,8 @@ class YourTrainerApp extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    final trainer_profile = await initTrainerProfile();
-                    safePrint('trainer profile: $trainer_profile');
+                    final trainerProfile = await initTrainerProfile();
+                    safePrint('trainer profile: $trainerProfile');
                   }, // TODO: add debug functionality
                   child: const Text("Become trainer")
                 )
@@ -127,7 +123,7 @@ class YourTrainerApp extends StatelessWidget {
                   if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else {
-                    return trainer_list_view(snapshot.data!);
+                    return trainerListView(snapshot.data!);
                   }
                 }
               }

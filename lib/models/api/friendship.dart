@@ -73,7 +73,7 @@ Future<List<Friendship>> queryPersonalTrainerConnections() async {
     return friends
       .where((Friendship? e) {
         safePrint("proc: $e");
-        final valid = e != null && e.Customer != null && e.Trainer != null;
+        final valid = e != null;
         if (!valid) {
           safePrint("Found invalid Friendship record $e");
         }
